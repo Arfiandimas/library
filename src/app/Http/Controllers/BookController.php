@@ -49,7 +49,7 @@ class BookController extends Controller
     public function show(int $id)
     {
         try {
-            $books = (new GetBookService())->setAuthodId($id)->call();
+            $books = (new GetBookService())->setBookId($id)->call();
             if ($books->status() != 200) {
                 return $this->error($books->message());
             }
@@ -66,7 +66,7 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $books = (new AddUpdateBookService($request))->setAuthodId($id)->call();
+            $books = (new AddUpdateBookService($request))->setBookId($id)->call();
             if ($books->status() != 200) {
                 return $this->error($books->message());
             }

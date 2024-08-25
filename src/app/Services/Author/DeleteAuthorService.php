@@ -31,15 +31,13 @@ class DeleteAuthorService extends ServiceBase
         DB::beginTransaction();
         try {
             // Delete books data by author
-            $deleteBooks = $this->bookRepo->deleteByCondition(['author_id' => $this->authorId]);
+            $this->bookRepo->deleteByCondition(['author_id' => $this->authorId]);
 
             // Delete redis data by author
-            $deleteRedisData = $this->redisRepo->deleteRedisData($this->authorId);
+            $this->redisRepo->deleteRedisData($this->authorId);
 
-            // Delete author after success delete books and redis data
-            if ((bool)$deleteBooks && (bool)$deleteRedisData) {
-                $this->results = $this->authorRepo->delete($this->authorId);
-            }
+            // Delete author
+            $this->results = $this->authorRepo->delete($this->authorId);
             DB::commit();
             return self::success($this->results);
         } catch (\Throwable $th) {

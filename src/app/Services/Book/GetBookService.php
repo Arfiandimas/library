@@ -20,7 +20,7 @@ class GetBookService extends ServiceBase
         $this->results = null;
     }
 
-    public function setAuthodId($bookId)
+    public function setBookId($bookId)
     {
         $this->bookId = $bookId;
         return $this;

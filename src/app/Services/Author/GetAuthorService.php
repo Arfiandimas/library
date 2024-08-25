@@ -20,7 +20,7 @@ class GetAuthorService extends ServiceBase
         $this->results = null;
     }
 
-    public function setAuthodId($authorId)
+    public function setAuthorId($authorId)
     {
         $this->authorId = $authorId;
         return $this;

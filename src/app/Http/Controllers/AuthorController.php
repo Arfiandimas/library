@@ -50,7 +50,7 @@ class AuthorController extends Controller
     public function show(int $id)
     {
         try {
-            $authors = (new GetAuthorService())->setAuthodId($id)->call();
+            $authors = (new GetAuthorService())->setAuthorId($id)->call();
             if ($authors->status() != 200) {
                 return $this->error($authors->message());
             }
@@ -67,7 +67,7 @@ class AuthorController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $authors = (new AddUpdateAuthorService($request))->setAuthodId($id)->call();
+            $authors = (new AddUpdateAuthorService($request))->setAuthorId($id)->call();
             if ($authors->status() != 200) {
                 return $this->error($authors->message());
             }

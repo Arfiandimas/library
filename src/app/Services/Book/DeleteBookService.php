@@ -28,7 +28,7 @@ class DeleteBookService extends ServiceBase
             $getBook = $this->bookRepo->condition(["id" => $this->bookId], true);
             if ($getBook) {
                 $this->redisRepo->deleteRedisData($getBook->author_id);
-                $this->results = $getBook->delete();
+                $this->results = $this->bookRepo->delete($this->bookId);
             }
             return self::success($this->results);
         } catch (\Throwable $th) {
