@@ -1,5 +1,7 @@
 # Library App
 
+Menggunakan Laravel 11 https://github.com/laravel/laravel
+
 ## Instalasi
 
 Saat melakukan setup aplikasi ini pastikan device anda sudah ***terinstall docker***, setelah itu jalankan perintah berikut pada base directory projek
@@ -44,4 +46,6 @@ Caching diimplementasi pada api :
 /authors/{id}/books
 ```
 
-Dimana saat melakukan delete ***author***, update ***book*** dan delete ***book*** maka caching akan dihapus dan akan dilakukan caching saat mengakses endpoint ***/authors/{id}/books***
+Dimana saat melakukan delete ***author***, update ***book*** dan delete ***book*** maka caching akan dihapus dan akan dilakukan caching saat mengakses endpoint ***/authors/{id}/books***.
+
+Saat mengakses endpoint ***/authors/{id}/books*** secara sistem akan melakukan pengecekan pada redis dengan key author_id, jika ditemukan maka akan mengambil data pada redis jika tidak ditemukan maka akan mengambil data pada database selanjutnya dilakukan cahing ke redis.
