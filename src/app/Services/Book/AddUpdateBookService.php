@@ -4,14 +4,17 @@ namespace App\Services\Book;
 
 use App\Base\ServiceBase;
 use App\Models\Book;
+use App\Repositories\Child\RedisRepository;
 use App\Repositories\Repository;
 use App\Responses\ServiceResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class AddUpdateBookService extends ServiceBase
 {
     protected $bookRepo;
+    protected $redisRepo;
     protected Request $request;
     protected ?int $bookId;
     protected $results;
@@ -19,6 +22,7 @@ class AddUpdateBookService extends ServiceBase
     public function __construct(Request $request)
     {
         $this->bookRepo = new Repository(new Book());
+        $this->redisRepo = new RedisRepository(new Redis());
         $this->request = $request;
         $this->bookId = null;
         $this->results = null;
@@ -43,8 +47,10 @@ class AddUpdateBookService extends ServiceBase
                     return self::error(null, 'book not found');
                 }
                 $this->results = $this->bookRepo->update($this->bookId, $this->validation()->validated());
+                $this->redisRepo->deleteRedisData($this->request->author_id ?? $checkBook->author_id);
             } else {
                 $this->results = $this->bookRepo->store($this->validation()->validated());
+                $this->redisRepo->deleteRedisData($this->request->author_id);
             }
             return self::success($this->results);
         } catch (\Throwable $th) {

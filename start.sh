@@ -1,1 +1,1 @@
-cp ./src/.env.example ./src/.env && docker compose up -d && docker compose run composer install && docker compose run artisan key:generate && docker compose run artisan migrate:refresh
+cp ./src/.env.example ./src/.env && docker compose up -d && docker compose run composer install && docker compose run artisan key:generate && docker compose run artisan migrate:refresh --seed

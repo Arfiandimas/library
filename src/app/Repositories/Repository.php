@@ -11,13 +11,11 @@ namespace App\Repositories;
  * 
  */
 
-use Illuminate\Database\Eloquent\Model;
-
 class Repository implements RepositoryInterface
 {
     protected $model;
 
-    public function __construct(Model $model)
+    public function __construct($model)
     {
         $this->model = $model;
     }
@@ -90,7 +88,7 @@ class Repository implements RepositoryInterface
     public function condition($rules, $first = false)
     {
         if (is_bool($first)) {
-            if ($first = true)
+            if ($first)
                 return $this->model->where($rules)->first();
             else
                 return $this->model->where($rules)->get();
