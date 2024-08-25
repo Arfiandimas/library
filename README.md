@@ -2,7 +2,7 @@
 
 ## Instalasi
 
-Saat melakukan setup aplikasi ini pastikan device anda sudah terinstall docker, setelah itu jalankan perintah berikut pada base directory projek
+Saat melakukan setup aplikasi ini pastikan device anda sudah ***terinstall docker***, setelah itu jalankan perintah berikut pada base directory projek
 
 ```bash
 ./start.sh
