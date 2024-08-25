@@ -7,6 +7,8 @@ Menggunakan Laravel 11 https://github.com/laravel/laravel
 Saat melakukan setup aplikasi ini pastikan device anda sudah ***terinstall docker***, setelah itu jalankan perintah berikut pada base directory projek
 
 ```bash
+git clone https://github.com/Arfiandimas/library.git
+cd library
 ./start.sh
 ```
 
