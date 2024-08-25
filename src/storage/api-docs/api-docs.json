@@ -324,12 +324,444 @@
                     }
                 }
             }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get a paginated list of books",
+                "description": "Fetch a paginated list of books with details like total data, per page, current page, last page, and next page URL",
+                "operationId": "getBooks",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The page number to retrieve",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "method": {
+                                            "type": "string",
+                                            "example": "index"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "total_data": {
+                                                    "type": "integer",
+                                                    "example": 500
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 25
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8004/api/books?page=2"
+                                                },
+                                                "result": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "Prof."
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Alice. 'Of course twinkling begins with an air of great dismay..."
+                                                            },
+                                                            "publish_date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "2002-12-22"
+                                                            },
+                                                            "author_id": {
+                                                                "type": "integer",
+                                                                "example": 33
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create a new book",
+                "description": "Create a new book entry in the database",
+                "operationId": "createBook",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Filosofi Teras"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Kita memiliki kebiasaan membesar-besarkan kesedihan. ..."
+                                    },
+                                    "publish_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2018-01-01"
+                                    },
+                                    "author_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "201"
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "method": {
+                                            "type": "string",
+                                            "example": "store"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Filosofi Teras"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Kita memiliki kebiasaan membesar-besarkan kesedihan. ..."
+                                                },
+                                                "publish_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2018-01-01"
+                                                },
+                                                "author_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 502
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get details of a specific book",
+                "description": "Fetch the details of a specific book by its ID, including associated author information",
+                "operationId": "getBookById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the book to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "method": {
+                                            "type": "string",
+                                            "example": "show"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Dr."
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Long Tale They were just beginning to end..."
+                                                },
+                                                "publish_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2003-10-05"
+                                                },
+                                                "author_id": {
+                                                    "type": "integer",
+                                                    "example": 29
+                                                },
+                                                "author": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 29
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Gonzalo Strosin"
+                                                        },
+                                                        "bio": {
+                                                            "type": "string",
+                                                            "example": "I chose,' the Duchess sneezed occasionally..."
+                                                        },
+                                                        "birth_date": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "2011-08-08"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update details of a specific book",
+                "description": "Update the title, description, and publish date of a specific book by its ID",
+                "operationId": "updateBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the book to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Filosofi Teras"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Kita memiliki kebiasaan membesar-besarkan kesedihan. ..."
+                                    },
+                                    "publish_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2018-02-02"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Book updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "method": {
+                                            "type": "string",
+                                            "example": "update"
+                                        },
+                                        "data": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete a book",
+                "description": "Delete a book by its ID",
+                "operationId": "deleteBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "method": {
+                                            "type": "string",
+                                            "example": "destroy"
+                                        },
+                                        "data": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Author",
             "description": "Author"
+        },
+        {
+            "name": "Books",
+            "description": "Books"
         }
     ]
 }
