@@ -38,10 +38,10 @@ Secara keseluruhan, kombinasi dari Repository Pattern dan Service Layer ini memb
 
 Teknik Performance Tuning yang digunakan adalah **Caching** dengan mengimplementasikan **Redis**
 
-Caching diimplementasi pada api 
+Caching diimplementasi pada api :
 
 ```bash
 /authors/{id}/books
 ```
 
-Dimana saat melakukan delete *author*, update *book* dan delete *book* maka caching akan dihapus dan akan dilakukan caching saat mengakses endpoint */authors/{id}/books*
+Dimana saat melakukan delete ***author***, update ***book*** dan delete ***book*** maka caching akan dihapus dan akan dilakukan caching saat mengakses endpoint ***/authors/{id}/books***
