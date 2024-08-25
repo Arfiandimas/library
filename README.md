@@ -4,7 +4,7 @@ Menggunakan Laravel 11 https://github.com/laravel/laravel
 
 ## Instalasi
 
-Saat melakukan setup aplikasi ini pastikan device anda sudah ***terinstall docker***, setelah itu jalankan perintah berikut pada base directory projek
+Saat melakukan setup aplikasi ini pastikan device anda sudah ***terinstall docker***, setelah docker berhasil dijalankan, eksekusi perintah berikut pada base directory projek
 
 ```bash
 git clone https://github.com/Arfiandimas/library.git
@@ -22,7 +22,7 @@ Dokumentasi api menggunakan Swagger https://github.com/DarkaOnLine/L5-Swagger, j
 docker compose run artisan l5-swagger:generate
 ```
 
-Untuk mengaksesnya dokumentasi API menggunakan url http://localhost:8004/api/documentation
+Untuk mengakses dokumentasi API menggunakan url http://localhost:8004/api/documentation
 
 ## Menjalankan Unit Test
 
@@ -48,6 +48,6 @@ Caching diimplementasi pada api :
 /authors/{id}/books
 ```
 
-Dimana saat melakukan delete ***author***, update ***book*** dan delete ***book*** maka caching akan dihapus dan akan dilakukan caching saat mengakses endpoint ***/authors/{id}/books***.
+Dimana saat melakukan ***delete author***, ***update book*** dan ***delete book*** maka caching akan dihapus dan selanjutnya dilakukan caching saat mengakses endpoint ***/authors/{id}/books***.
 
-Saat mengakses endpoint ***/authors/{id}/books*** secara sistem akan melakukan pengecekan pada redis dengan key author_id, jika ditemukan maka akan mengambil data pada redis jika tidak ditemukan maka akan mengambil data pada database selanjutnya dilakukan cahing ke redis.
+Saat mengakses endpoint ***/authors/{id}/books*** secara sistem akan melakukan pengecekan pada redis dengan key author_id, jika ditemukan maka akan mengambil data pada redis jika tidak ditemukan maka akan mengambil data pada database selanjutnya dilakukan caching ke redis.
