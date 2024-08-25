@@ -18,8 +18,12 @@ docker compose run artisan test
 
 ## Dokumentasi API
 
-Dokumentasi api menggunakan Swagger https://github.com/DarkaOnLine/L5-Swagger
+Dokumentasi api menggunakan Swagger https://github.com/DarkaOnLine/L5-Swagger , jalankan perintah berikut untuk generate dokumentasi API
 
-Untuk mengaksesnya menggunakan url http://localhost:8004/api/documentation
+```bash
+docker compose run artisan l5-swagger:generate
+```
+
+Untuk mengaksesnya dokumentasi API menggunakan url http://localhost:8004/api/documentation
 
 ## Desain Pattern
