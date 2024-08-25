@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Traits\ApiResponser;
 
+/**
+ * @OA\Info(title="Documentation API Library", version="1.0")
+ */
 abstract class Controller
 {
     use ApiResponser;

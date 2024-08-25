@@ -36,7 +36,7 @@ class BookController extends Controller
             if ($books->status() != 200) {
                 return $this->error($books->message());
             }
-            return $this->success($books->data(), $books->message(), __FUNCTION__);
+            return $this->success($books->data(), $books->message(), __FUNCTION__, 201, 201);
         } catch (\Throwable $th) {
             $this->logError($th, "add book");
             return $this->error($th->getMessage(), __FUNCTION__);
