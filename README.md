@@ -22,7 +22,7 @@ Dokumentasi api menggunakan Swagger https://github.com/DarkaOnLine/L5-Swagger, j
 docker compose run artisan l5-swagger:generate
 ```
 
-Untuk mengakses dokumentasi API menggunakan url http://localhost:8004/api/documentation
+Setelah selesai eksekusi, akses dokumentasi API menggunakan url http://localhost:8004/api/documentation
 
 ## Menjalankan Unit Test
 
